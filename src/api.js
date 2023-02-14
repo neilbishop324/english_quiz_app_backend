@@ -1,12 +1,16 @@
 const express = require("express");
 const serverless = require("serverless-http");
 const mongoose = require("mongoose");
+const authRouter = require("../routes/auth");
+const sublistRouter = require("../routes/sublistword");
+const wordRouter = require("../routes/word");
+require('dotenv').config();
 
 const PORT = process.env.PORT || 3000;
 const app = express();
 const router = express.Router();
 
-const DB = "mongodb+srv://neilbishop:mXPX9ievLm1M5gfU@cluster0.fnqu6ac.mongodb.net/?retryWrites=true&w=majority";
+const DB = process.env.DB;
 
 app.use(express.json());
 
@@ -22,6 +26,11 @@ app.listen(PORT, "0.0.0.0", () => {
     console.log(`Connected at port ${PORT}`);
 });
 
-app.use("/.netlify/functions/api", router);
+const api = "/.netlify/functions/api";
+
+app.use(api, router);
+app.use(`${api}/auth`, authRouter);
+app.use(`${api}/sublist`, sublistRouter);
+app.use(`${api}/word`, wordRouter);
 
 module.exports.handler = serverless(app);
