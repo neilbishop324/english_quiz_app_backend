@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const authRouter = require("../routes/auth");
 const sublistRouter = require("../routes/sublistword");
 const wordRouter = require("../routes/word");
+const userRouter = require("../routes/user");
 require('dotenv').config();
 
 const PORT = process.env.PORT || 3000;
@@ -32,5 +33,6 @@ app.use(api, router);
 app.use(`${api}/auth`, authRouter);
 app.use(`${api}/sublist`, sublistRouter);
 app.use(`${api}/word`, wordRouter);
+app.use(`${api}/user`, userRouter);
 
 module.exports.handler = serverless(app);

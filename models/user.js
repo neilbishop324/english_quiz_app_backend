@@ -29,7 +29,12 @@ const userSchema = mongoose.Schema({
             },
             message: "Please enter a long password",
         }
-    }
+    },
+    favorites: [{
+        type: String,
+        trim: true,
+        lowercase: true,
+    }],
     //extra values
 });
 
