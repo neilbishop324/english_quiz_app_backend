@@ -27,12 +27,9 @@ app.listen(PORT, "0.0.0.0", () => {
     console.log(`Connected at port ${PORT}`);
 });
 
-const api = "/.netlify/functions/api";
-
-app.use(api, router);
-app.use(`${api}/auth`, authRouter);
-app.use(`${api}/sublist`, sublistRouter);
-app.use(`${api}/word`, wordRouter);
-app.use(`${api}/user`, userRouter);
+app.use('/auth', authRouter);
+app.use('/sublist', sublistRouter);
+app.use('/word', wordRouter);
+app.use('/user', userRouter);
 
 module.exports.handler = serverless(app);
